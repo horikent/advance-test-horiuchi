@@ -22,6 +22,7 @@
 
   table{
     text-align:left;
+    color:black;
   }
 
   
@@ -80,7 +81,7 @@
     <h2>管理システム</h2>
   </div>
   <div class="admin__table">
-    <form action="/search" method="post">
+    <form action="/admin" method="post">
       @csrf
       <table>
         <div class="flex-item">
@@ -89,7 +90,7 @@
               お名前
             </th>
             <td>
-              <input type="text" name="fullname">     
+              <input type="string" name="fullname">   
             </td>
           </tr>
           <tr>
@@ -108,7 +109,7 @@
             登録日
           </th>
           <td>
-            <input type="timestamp" name="date"> ~ <input type="timestamp" name="date"><br>
+            <input type="date" name="date"> ~ <input type="date" name="date"><br>
           </td>
         </tr>
         <tr>
@@ -127,12 +128,14 @@
               <a href="#" class="reset">リセット</a>
             </div> 
           </td>
-        </table>
-      </form>
-    </div> 
+      </table>
+    </form>
   </div> 
+</div> 
+
   <div class="result__table">
     <table>
+
       <tr>
         <div class="result__th">
           <th>ID</th>
@@ -145,25 +148,30 @@
       </tr>
       <ul>  
         @if(@isset($contacts))
+              {{ $contacts->links() }}
           <div class="result__td">
             @foreach($contacts as $contact)
               <td>
-                {{$contacts-id}}          
+                {{$contact->id}}
               </td>      
               <td>
-                {{$contacts-fullname}}
+                {{$contact->fullname}}
               </td>      
               <td>
-                {{$contacts-gender}}  
+                {{$contact->gender}}
               </td>      
               <td>
-                {{$contacts-email}}
+                {{$contact->email}}
               </td>      
               <td>
-                {{$contacts-opinion}}  
+                {{$contact->opinion}}
               </td>      
               <td>
-                <button>削除</button>
+                <form action="/delete" method="post">
+                  @csrf
+                    <input type="hidden" name="id" value="{{$contact->id}}">
+                      <button type="submit">削除</button>
+                </form>
               </td>
             @endforeach
           </div>

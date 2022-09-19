@@ -51,6 +51,9 @@
     height: 30px;
     border: 1px solid rgb(204,204,204);
     border-radius:5px;
+  }
+
+  input[type= "radio"]{
 
   }
 
@@ -93,13 +96,13 @@
 
 </head>
 @if (count($errors) > 0)
-<ul>
-  @foreach ($errors->all() as $error)
-  <li>
-    {{$error}}
-  </li>
-  @endforeach
-</ul>
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>
+      {{$error}}
+    </li>
+    @endforeach
+  </ul>
 @endif
 <div class="container">
   <div class="contact_ttl">
@@ -191,7 +194,7 @@
           ご意見 <span class="contact-red">*</span>
         </th>
         <td>
-          <input type=textarea name="opinion" value="{{ old('opinion') }}">
+          <input type=textarea name="opinion" value="{{ old('opinion') }}" minlength="1" maxlength="120">
             @if ($errors->has('opinion'))
               <p class="error-message">{{ $errors->first('opinion') }}</p>
             @endif

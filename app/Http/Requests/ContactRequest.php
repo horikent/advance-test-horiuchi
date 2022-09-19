@@ -13,7 +13,11 @@ class ContactRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if ($this->path() == '/') {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -36,12 +40,13 @@ class ContactRequest extends FormRequest
     public function messages()
     {
         return [
-            'fullname.required' => '名前を入力してください',
-            'email.required' =>  'メールアドレスを入力してください',
-            'email.email' =>  'メールアドレスの形式で入力してください',
-            'postcode.required' =>  '郵便番号を入力してください',
-			'address.required' => '住所を入力してください',
-			'opinion.required' => 'ご意見を入力してください'
+            'name.required' => '名前を入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.email' => 'メールアドレスの形式で入力してください',
+            'postocode.required' => '郵便番号は半角数字８桁で入力してください',
+            'registered_at.date' => '日付の形式で入力してください',
+            'address.required' => '住所を入力してください',
+            'opinion.required' => 'ご意見を入力してください',
         ];
     }
 }

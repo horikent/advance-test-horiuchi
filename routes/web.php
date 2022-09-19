@@ -10,7 +10,7 @@ Route::post('/confirm', [ContactsController::class, 'confirm']);
 Route::get('/thanks', [ContactsController::class, 'thanks']);
 Route::post('/add', [ContactsController::class, 'create']);
 Route::get('/admin', [ContactsController::class, 'find']);
-Route::post('/search', [ContactsController::class, 'search']);
+Route::post('/admin', [ContactsController::class, 'search']);
 Route::post('/delete', [ContactsController::class, 'remove']);
 /*
 |--------------------------------------------------------------------------
