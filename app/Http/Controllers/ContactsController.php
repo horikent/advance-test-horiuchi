@@ -36,7 +36,7 @@ class ContactsController extends Controller
             'fullname' => 'required',
             'gender' =>  'required',
             'email' =>  'required|email',
-            'postcode' =>  'required',
+            'postcode' =>  'required|in:-',
 			'address' => 'required',
 			'opinion' => 'required|max:120'
         ]);
@@ -115,6 +115,12 @@ return view('confirm',['inputs'=>$inputs,]);
             'opinion' => $opinion
                 ];
         return view('admin', $param);
+    }
+    
+    public function remove(Request $request)
+    {
+        Contact::find($request->id)->delete();
+        return view('admin');
     }
 
 

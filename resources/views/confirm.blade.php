@@ -1,5 +1,5 @@
 <style>
-  h2{
+  h3{
     text-align:center;
   }
 
@@ -14,17 +14,20 @@
 
   .contact__table{
     text-align:center;
-    margin:0 auto 0 30%;
+    margin:0 auto 0 20%;
   }
 
   table{
     text-align:left;
+    font-size:14px;
+    margin:0 auto 0 0;
   }
+
 
   
   th {
       color: black;
-      width:15%;
+      width:20%;
       padding: 5px 20px;
     }
 
@@ -41,7 +44,7 @@
       cursor: pointer;
   }
   .confirm__btn{
-    margin:20px 40% 0 auto;
+    margin:20px 25% 0 auto;
   }
 
   .back-btn{
@@ -66,18 +69,9 @@
 </head>
 <body>
 
-@if (count($errors) > 0)
-<ul>
-  @foreach ($errors->all() as $error)
-  <li>
-    {{$error}}
-  </li>
-  @endforeach
-</ul>
-@endif
 <div class="container">
   <div class="contact__ttl">
-    <h2>お問い合わせ</h2>
+    <h3>お問い合わせ</h3>
   </div>
   <div class="contact__table">
     <form method="POST" action="/add">

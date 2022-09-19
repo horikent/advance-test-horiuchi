@@ -1,5 +1,5 @@
 <style>
-  h2{
+  h3{
     text-align:center;
   }
 
@@ -14,7 +14,7 @@
 
   .contact_table{
     text-align:center;
-    margin:0 auto 0 25%;
+    margin:0 auto 0 20%;
   }
 
   table{
@@ -24,18 +24,19 @@
   
   th {
       color: black;
-      width:15%;
-      padding: 5px 20px;
+      width:20%;
+      padding: 10px 20px 0 0;
       font-size:12px;
-
+      vertical-align:top;
     }
 
   td {
-      padding: 25px 0px;
+      padding: 10px 0px;
       width:60%;
+      height:30px;
       color:rgb(204,204,204);
-      font-size:14px;
-      line-height: 150%;
+      font-size:13px;
+      line-height: 200%;
   }
 
   .gender__font{
@@ -48,7 +49,7 @@
 
   input[type= "char"]{
     width: 85%;
-    height: 30px;
+    height: 35px;
     border: 1px solid rgb(204,204,204);
     border-radius:5px;
   }
@@ -59,26 +60,29 @@
 
   input[type="string"] {
     width: 90%;
-    height: 30px;
+    height: 35px;
     border: 1px solid rgb(204,204,204);
     border-radius:5px;
   }
 
-    input[type="textarea"]{
+  input[type="textarea"]{
     width: 90%;
     height: 80px;
     border: 1px solid rgb(204,204,204);
     border-radius:5px;
   }
 
-  button, .confirm__btn{
-      padding: 10px 20px;
+  .submit__btn{
+    margin:20px 25% 0 auto;
+  }
+
+    button{
+      padding: 10px 40px;
       background-color: black;
       border: none;
       color: white;
       cursor: pointer;
       border-radius:5px;
-      margin:0 15%;
   }
 
   .flex-item{
@@ -97,7 +101,7 @@
 </head>
 <div class="container">
   <div class="contact_ttl">
-    <h2>お問い合わせ</h2>
+    <h3>お問い合わせ</h3>
   </div>
   <div class="contact_table">
     <form method="POST" action="/confirm">
@@ -113,7 +117,7 @@
               @if ($errors->has('fullname'))
                 <p class="error-message">{{ $errors->first('fullname') }}</p>
               @endif<br>
-                例) 山田　太郎 
+                &emsp;例) 山田　太郎 
           </div>  
         </td>
       </tr>
@@ -140,7 +144,7 @@
             @if ($errors->has('email'))
               <p class="error-message">{{ $errors->first('email') }}</p>
             @endif<br>
-          例) test@example.com
+          &emsp;例) test@example.com
         </td>
       </tr>
       <tr>
@@ -152,7 +156,7 @@
             @if ($errors->has('postcode'))
               <p class="error-message">{{ $errors->first('postcode') }}</p>
             @endif<br>
-            例)123-4567
+            &emsp;例)123-4567
         </td>
       </tr>
       <tr>
@@ -164,7 +168,7 @@
             @if ($errors->has('address'))
               <p class="error-message">{{ $errors->first('address') }}</p>
             @endif<br>
-          例)東京都渋谷区千駄ヶ谷1-2-3
+          &emsp;例)東京都渋谷区千駄ヶ谷1-2-3
         </td>
       </tr>
       <tr>
@@ -177,7 +181,7 @@
           @if ($errors->has('building_name'))
             <p class="error-message">{{ $errors->first('building_name') }}</p>
           @endif<br>
-            例)千駄ヶ谷マンション101
+            &emsp;例)千駄ヶ谷マンション101
         </td>
       </tr>
       <tr>
@@ -191,12 +195,10 @@
             @endif
         </td>
       </tr>
-      <tr>
-        <th></th>
-        <td>
-          <button type="submit">確認</button>
-        </td>
     </table>
+    <div class="submit__btn">
+      <button type="submit">確認</button>
+    </div>
   </form>
 </div>    
 

@@ -1,5 +1,5 @@
 <style>
-  h2{
+  h3{
     text-align:center;
   }
 
@@ -14,27 +14,27 @@
 
   .admin__table{
     text-align:center;
-    width:80%;
+    width:90%;
     margin:0 auto;
     border:1px solid black;
-    border-radius:5px;
   }
 
   table{
     text-align:left;
     color:black;
+    font-size:12px;
   }
 
   
   th {
       color: black;
-      width:15%;
+      width:20%;
       padding: 5px 20px;
     }
 
   td {
-      padding: 25px 10px;
-      width:60%;
+      padding: 15px 10px;
+      width:70%;
   }
 
   .gender__ttl{
@@ -42,16 +42,41 @@
     font-weight:bold;
   }
   .admin__btn{
-    margin:0 31%;
+    width:150px;
+    text-align:center;
+    margin:0 40% 0 auto;
+  }
+
+  input[type="string"]{
+    height: 35px;
+    border: 1px solid rgb(204,204,204);
+    border-radius:5px;
+  }
+
+    input[type="date"]{
+    height: 35px;
+    border: 1px solid rgb(204,204,204);
+    border-radius:5px;
+  }
+
+  .result__table{
+    width:95%;
+    justify-content:space-between;
+    margin:5% auto auto 5%;
+  }
+
+  .result__td{
+    border:1px solid black;
+    border-collapse:collapse;
   }
 
   .search__btn {
-      padding: 10px 30px;
+      padding: 10px 30%;
       background-color: black;
       border: none;
       border-radius: 5px;
       color: white;
-    cursor: pointer;
+      cursor: pointer;
   }
 
   .reset__btn{
@@ -89,7 +114,7 @@
 @endif
 <div class="admin__container">
   <div class="contact_ttl">
-    <h2>管理システム</h2>
+    <h3>管理システム</h3>
   </div>
   <div class="admin__table">
     <form action="/admin" method="post">
@@ -114,7 +139,7 @@
             登録日
           </th>
           <td>
-            <input type="date" name="date"> ~ <input type="date" name="date"><br>
+            <input type="date" name="date">&emsp;~&emsp;<input type="date" name="date"><br>
           </td>
         </tr>
         <tr>
@@ -127,20 +152,17 @@
         </tr>
         <tr>
           <th></th>
-          <td>
-            <div class="admin__btn">
-              <input type="submit" class="search__btn" value="検索"><br>
-              <input type="reset" class="reset__btn" value="リセット">
-            </div> 
-          </td>
       </table>
+      <div class="admin__btn">
+        <input type="submit" class="search__btn" value="検索"><br>
+        <input type="reset" class="reset__btn" value="リセット">
+      </div> 
     </form>
   </div> 
 </div> 
 
   <div class="result__table">
     <table>
-
       <tr>
         <div class="result__th">
           <th>ID</th>
