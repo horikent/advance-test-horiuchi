@@ -95,15 +95,6 @@
     <title>お問い合わせ</title>
 
 </head>
-@if (count($errors) > 0)
-  <ul>
-    @foreach ($errors->all() as $error)
-    <li>
-      {{$error}}
-    </li>
-    @endforeach
-  </ul>
-@endif
 <div class="container">
   <div class="contact_ttl">
     <h2>お問い合わせ</h2>
@@ -117,7 +108,7 @@
           お名前 <span class="contact-red">*</span>
         </th>
         <td>
-          <div class="fullname"></div>
+          <div class="fullname flex-item"></div>
             <input name="fullname" value="{{ old('fullname') }}" type="string">
               @if ($errors->has('fullname'))
                 <p class="error-message">{{ $errors->first('fullname') }}</p>

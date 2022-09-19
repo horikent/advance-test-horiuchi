@@ -97,6 +97,7 @@ return view('confirm',['inputs'=>$inputs,]);
         $gender = $request->gender;
         $email = $request->email;
         $opinion = $request->opinion;
+        $contacts = Contact::simplePaginate(10);
 
         if (!empty($fullname)){
             $contacts = Contact::where('fullname', 'LIKE BINARY', "%{$fullname}%")->get();
@@ -113,7 +114,6 @@ return view('confirm',['inputs'=>$inputs,]);
             'email' => $email,
             'opinion' => $opinion
                 ];
-        $contacts = Contact::simplePaginate(4);
         return view('admin', $param);
     }
 

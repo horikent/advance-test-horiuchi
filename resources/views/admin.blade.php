@@ -36,19 +36,30 @@
       padding: 25px 10px;
       width:60%;
   }
+
+  .gender__ttl{
+    margin-left:10px;
+    font-weight:bold;
+  }
   .admin__btn{
     margin:0 31%;
   }
 
-  button {
+  .search__btn {
       padding: 10px 30px;
       background-color: black;
       border: none;
       border-radius: 5px;
       color: white;
+    cursor: pointer;
   }
-  .reset{
+
+  .reset__btn{
     margin-left:5%;
+    background:none;
+    border:none;
+    color:blue;
+    cursor: pointer;
   }
 
   .flex-item{
@@ -90,14 +101,8 @@
               お名前
             </th>
             <td>
-              <input type="string" name="fullname">   
-            </td>
-          </tr>
-          <tr>
-            <th>
-              性別 
-            </th>
-            <td>
+              <input type="string" name="fullname">               
+              <span class="gender__ttl">性別</span> 
             	<input type="radio" name="gender" value="1||2"  checked>全て
           		<input type="radio" name="gender" value="1">男性
     		      <input type="radio" name="gender" value="2">女性
@@ -124,8 +129,8 @@
           <th></th>
           <td>
             <div class="admin__btn">
-              <button type="submit">検索</button><br>
-              <a href="#" class="reset">リセット</a>
+              <input type="submit" class="search__btn" value="検索"><br>
+              <input type="reset" class="reset__btn" value="リセット">
             </div> 
           </td>
       </table>
