@@ -86,29 +86,48 @@ return view('confirm',['inputs'=>$inputs,]);
             'fullname' => $request->fullname,
             'gender' =>  $request->gender,
             'email' =>  $request->email,
-			'opinion' => $request->opinion
+			'opinion' => $request->opinion,
             ];
             return view('admin', $param);
     }
 
     public function search(Request $request)
     {
+        $id = $request->id;
         $fullname = $request->fullname;
         $gender = $request->gender;
         $email = $request->email;
         $opinion = $request->opinion;
-        $contacts = Contact::simplePaginate(10);
+        $from = $request-> from;
+        $until = $request-> until;
+        $created_at =$request->created_at;
+
+        if (!empty($gender)){
+            $contacts = Contact::where('gender', 'LIKE BINARY', "%{$gender}%")->get();
+        }
+
+        if (!empty($from)&&!empty($until)){
+            $contacts = Contact::getDate($from, $until);
+
+        }elseif ((!empty($from))&&($created_at>$from)){
+            $contacts = Contact::where('created_at', '>=', $from)->get();
+
+        }elseif((!empty($until))&&($created_at < $until)){
+            $contacts = Contact::where('created_at', '<=', $until)->get();
+        }
+        
+        
 
         if (!empty($fullname)){
             $contacts = Contact::where('fullname', 'LIKE BINARY', "%{$fullname}%")->get();
         }
-        if (!empty($gender)){
-            $contacts = Contact::where('gender', 'LIKE BINARY', "%{$gender}%")->get();
-        }
+
         if (!empty($email)){
             $contacts = Contact::where('email', 'LIKE BINARY', "%{$email}%")->get();
         }
         $param=[
+            'id' => $id,
+            'contacts' => $contacts,
             'fullname' => $fullname,
             'gender' => $gender,
             'email' => $email,
@@ -121,6 +140,10 @@ return view('confirm',['inputs'=>$inputs,]);
     {
         Contact::find($request->id)->delete();
         return view('admin');
+    }
+    public function reset(Request $request)
+    {
+        return view ('admin');
     }
 
 
