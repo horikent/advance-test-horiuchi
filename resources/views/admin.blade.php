@@ -42,11 +42,7 @@
     margin-left:10px;
     font-weight:bold;
   }
-  .admin__btn{
-    width:150px;
-    text-align:center;
-    margin:0 40% 0 auto;
-  }
+
 
   input[type="string"]{
     height: 35px;
@@ -60,9 +56,34 @@
     border-radius:5px;
   }
 
+  .admin__btn{
+    width:150px;
+    text-align:center;
+    margin:0 40% 0 auto;
+  }
+  .search__btn {  
+    padding: 10px 30%;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .reset__btn{
+    background:none;
+    border:none;
+    color:blue;
+    cursor: pointer;
+  }
+  
   .result__table{
     width:100%;
     margin:5% auto auto 5%;
+    justify-content:space-between;
+  }
+  .result__th{
+    justify-content:space-between;
   }
 
   .result__td{
@@ -71,7 +92,7 @@
 
   .td-id{
     width:5%;
-    margin:0 5%;
+    margin:0 5% 0 15%;
   }
   .td-fullname{
     width:15%;
@@ -104,24 +125,6 @@
     margin:0 5%;
   }
 
-
-
-  .search__btn {
-      padding: 10px 30%;
-      background-color: black;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-  }
-
-  .reset__btn{
-    margin-left:5%;
-    background:none;
-    border:none;
-    color:blue;
-    cursor: pointer;
-  }
 
   .delete__btn{
       padding: 3px 20px;
@@ -168,7 +171,7 @@
       <table>
         <div class="flex-item">
           <tr>
-            <th class="search-th">
+            <th class="search-th" >
               お名前
             </th>
             <td class="search-td">
@@ -197,30 +200,30 @@
           </td>
         </tr>
       </table>
-      <div class="admin__btn">
-        <input type="submit" class="search__btn" value="検索"><br>
-          <form action="/reset" method="post">
-            <input type="submit" class="reset__btn" value="リセット">
-          </form>  
-      </div> 
+    <div class="admin__btn">
+      <input type="submit" class="search__btn" value="検索"><br> 
     </form>
+      <form action="/admin" method="get">
+        <button type="submit" class="reset__btn" >リセット</button>
+      </form>
+    </div>    
   </div> 
 </div> 
 
   <div class="result__table">
     <table>
-      <tr>
-        <div class="result__th">
-          <th>ID</th>
-          <th>お名前</th>
-          <th>性別</th>
-          <th>メールアドレス</th>
-          <th>ご意見</th>
-          <th></th>
-        </div>
-      </tr>
-      <ul>  
-        @if(@isset($contacts))
+      @if(@isset($contacts))
+        <tr>
+          <div class="result__th">
+            <th>ID</th>
+            <th>お名前</th>
+            <th>性別</th>
+            <th>メールアドレス</th>
+            <th>ご意見</th>
+            <th></th>
+          </div>
+        </tr>
+        <ul>  
           <div class="result__td">
             @foreach($contacts as $contact)
               <tr>
@@ -253,8 +256,8 @@
               </tr>  
             @endforeach
           </div>
-        @endif  
-      </ul>
+        </ul>
+      @endif  
     </table>  
   </div>   
 </body>

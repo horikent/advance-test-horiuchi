@@ -12,7 +12,6 @@ Route::post('/add', [ContactsController::class, 'create']);
 Route::get('/admin', [ContactsController::class, 'find']);
 Route::post('/admin', [ContactsController::class, 'search']);
 Route::post('/delete', [ContactsController::class, 'remove']);
-Route::post('/reset', [ContactsController::class, 'reset']);
 
 /*
 |--------------------------------------------------------------------------

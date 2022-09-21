@@ -77,13 +77,7 @@ class ContactsController extends Controller
 
     public function find(Request $request)
     {
-        $param=[
-            'fullname' => $request->fullname,
-            'gender' =>  $request->gender,
-            'email' =>  $request->email,
-			'opinion' => $request->opinion,
-            ];
-            return view('admin', $param);
+            return view('admin');
     }
 
     public function search(Request $request)
