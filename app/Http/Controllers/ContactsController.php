@@ -91,29 +91,33 @@ class ContactsController extends Controller
         $until = $request-> until;
         $created_at =$request->created_at;
 
+
         if ($gender == 0){
-            $contacts = Contact::get();
+            $contacts = Contact::paginate(10);
         }else{
-            $contacts = Contact::where('gender', '=', "$gender")->get();
+            $contacts = Contact::where('gender', '=', "$gender")->paginate(10);
         }
 
         if (!empty($from)&&!empty($until)){
-            $contacts = Contact::getDate($from, $until);
+            $contacts = Contact::where('created_at', '>=', $from)
+            ->where('created_at', '<=', $until)
+            ->paginate(10);
 
         }elseif ((!empty($from))&&($created_at>$from)){
-            $contacts = Contact::where('created_at', '>=', $from)->get();
+            $contacts = Contact::where('created_at', '>=', $from)->paginate(10);
 
         }elseif((!empty($until))&&($created_at < $until)){
-            $contacts = Contact::where('created_at', '<=', $until)->get();
+            $contacts = Contact::where('created_at', '<=', $until)->paginate(10);
         }
         
         if (!empty($fullname)){
-            $contacts = Contact::where('fullname', 'LIKE BINARY', "%{$fullname}%")->get();
+            $contacts = Contact::where('fullname', 'LIKE BINARY', "%{$fullname}%")->paginate(10);
         }
 
         if (!empty($email)){
-            $contacts = Contact::where('email', 'LIKE BINARY', "%{$email}%")->get();
+            $contacts = Contact::where('email', 'LIKE BINARY', "%{$email}%")->paginate(10);
         }
+
         $param=[
             'id' => $id,
             'contacts' => $contacts,

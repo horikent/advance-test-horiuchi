@@ -80,23 +80,19 @@
   .result__table{
     width:100%;
     margin:5% auto auto 5%;
-    justify-content:space-between;
+    text-align:center;
   }
+  
   .result__th{
-    justify-content:space-between;
-  }
-
-  .result__td{
-    justify-content:space-between;
   }
 
   .td-id{
     width:5%;
-    margin:0 5% 0 15%;
+    margin:0 1% 0 15%;
   }
   .td-fullname{
     width:15%;
-    margin:0 5%;
+    margin:0 1%;
   }
   .td-gender{
     width:5%;
@@ -139,6 +135,9 @@
     display:flex;
   }
 
+    svg.w-5.h-5 {/*paginateメソッドの矢印の大きさ調整のために追加*/width: 30px;
+    height: 30px;
+    }
 
 </style>
 <!DOCTYPE html>
@@ -215,11 +214,11 @@
       @if(@isset($contacts))
         <tr>
           <div class="result__th">
-            <th>ID</th>
-            <th>お名前</th>
-            <th>性別</th>
-            <th>メールアドレス</th>
-            <th>ご意見</th>
+            <th class="th-id">ID</th>
+            <th class="th-fullname">お名前</th>
+            <th class="th-gender">性別</th>
+            <th class="th-email">メールアドレス</th>
+            <th class="th-opinion">ご意見</th>
             <th></th>
           </div>
         </tr>
@@ -256,8 +255,9 @@
               </tr>  
             @endforeach
           </div>
+          {{ $contacts->appends(request()->query())->links() }}
         </ul>
-      @endif  
+      @endif
     </table>  
   </div>   
 </body>
