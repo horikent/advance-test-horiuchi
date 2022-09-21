@@ -21,13 +21,11 @@ class ContactsController extends Controller
         ];
     }
     
-
     public function index(Request $request)
     {
         return view('index');
     }
     
-
     
     public function confirm(Request $request)
     {
@@ -51,12 +49,8 @@ class ContactsController extends Controller
         ];
         $inputs = $request->all();
 
-return view('confirm',['inputs'=>$inputs,]);
-
-
-return view('confirm',['inputs'=>$inputs,]);
+        return view('confirm',['inputs'=>$inputs,]);
     }
-
 
     public function create(Request $request)
     {
@@ -80,6 +74,7 @@ return view('confirm',['inputs'=>$inputs,]);
                 return view('thanks');
             }    
     }
+
     public function find(Request $request)
     {
         $param=[
@@ -102,8 +97,10 @@ return view('confirm',['inputs'=>$inputs,]);
         $until = $request-> until;
         $created_at =$request->created_at;
 
-        if (!empty($gender)){
-            $contacts = Contact::where('gender', 'LIKE BINARY', "%{$gender}%")->get();
+        if ($gender == 0){
+            $contacts = Contact::get();
+        }else{
+            $contacts = Contact::where('gender', '=', "$gender")->get();
         }
 
         if (!empty($from)&&!empty($until)){
@@ -116,8 +113,6 @@ return view('confirm',['inputs'=>$inputs,]);
             $contacts = Contact::where('created_at', '<=', $until)->get();
         }
         
-        
-
         if (!empty($fullname)){
             $contacts = Contact::where('fullname', 'LIKE BINARY', "%{$fullname}%")->get();
         }
@@ -141,6 +136,7 @@ return view('confirm',['inputs'=>$inputs,]);
         Contact::find($request->id)->delete();
         return view('admin');
     }
+
     public function reset(Request $request)
     {
         return view ('admin');

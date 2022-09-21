@@ -5,6 +5,7 @@
 
   .admin__container{
     width:90%;
+    margin-left:5%;
     margin-top:30px;
   }
 
@@ -26,13 +27,13 @@
   }
 
   
-  th {
+  .search-th {
       color: black;
       width:20%;
       padding: 5px 20px;
     }
 
-  td {
+  .search-td {
       padding: 15px 10px;
       width:70%;
   }
@@ -60,10 +61,49 @@
   }
 
   .result__table{
-    width:95%;
-    justify-content:space-between;
+    width:100%;
     margin:5% auto auto 5%;
   }
+
+  .result__td{
+    justify-content:space-between;
+  }
+
+  .td-id{
+    width:5%;
+    margin:0 5%;
+  }
+  .td-fullname{
+    width:15%;
+    margin:0 5%;
+  }
+  .td-gender{
+    width:5%;
+    margin:0 5%;
+  }
+  .td-email{
+    width:15%;
+    margin:0 5%;
+  }
+  .td-opinion{
+  width:25%;
+  margin:0 15% 0 5% ;
+  }
+  
+  .short{
+    width:320px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .td-button{
+    width:50px;
+    writing-mode:vertical-lr;
+    font:12px;
+    margin:0 5%;
+  }
+
 
 
   .search__btn {
@@ -81,6 +121,15 @@
     border:none;
     color:blue;
     cursor: pointer;
+  }
+
+  .delete__btn{
+      padding: 3px 20px;
+      background-color: black;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      cursor: pointer;
   }
 
   .flex-item{
@@ -119,41 +168,39 @@
       <table>
         <div class="flex-item">
           <tr>
-            <th>
+            <th class="search-th">
               お名前
             </th>
-            <td>
+            <td class="search-td">
               <input type="string" name="fullname">               
               <span class="gender__ttl">性別</span> 
-            	<input type="radio" name="gender" value="1||2"  checked>全て
+            	<input type="radio" name="gender" value="0"  checked>全て
           		<input type="radio" name="gender" value="1">男性
     		      <input type="radio" name="gender" value="2">女性
             </td>
           </tr>
         <div>  
         <tr>
-          <th>
+          <th class="search-th">
             登録日
           </th>
-          <td>
+          <td class="search-td">
             <input type="date" name="from">&emsp;~&emsp;<input type="date" name="until"><br>
           </td>
         </tr>
         <tr>
-          <th>
+          <th class="search-th">
             メールアドレス
           </th>
-          <td>
+          <td class="search-td">
             <input type="string" name="email"><br>
           </td>
         </tr>
-        <tr>
-          <th></th>
       </table>
       <div class="admin__btn">
         <input type="submit" class="search__btn" value="検索"><br>
           <form action="/reset" method="post">
-            <input type="reset" class="reset__btn" value="リセット">
+            <input type="submit" class="reset__btn" value="リセット">
           </form>  
       </div> 
     </form>
@@ -177,26 +224,30 @@
           <div class="result__td">
             @foreach($contacts as $contact)
               <tr>
-                <td>
+                <td class="td-id">
                   {{$contact->id}}
                 </td>      
-                <td>
+                <td class="td-fullname">
                   {{$contact->fullname}}
                 </td>      
-                <td>
-                  {{$contact->gender}}
+                <td class="td-gender">
+                  @if($contact->gender ==1)
+                    男性
+                  @else
+                    女性
+                  @endif
                 </td>      
-                <td>
+                <td class="td-email">
                   {{$contact->email}}
                 </td>      
-                <td>
-                  {{$contact->opinion}}
+                <td class="td-opinion">
+                  <p class="short">{{$contact->opinion}}<p>
                 </td>      
                 <form action="/delete" method="post">
                   @csrf
-                    <td>
+                    <td class="td-btn">
                         <input type="hidden" name="id" value="{{$contact->id}}">
-                          <button type="submit">削除</button>
+                          <button class="delete__btn" type="submit">削除</button>
                     </td>
                 </form>
               </tr>  
