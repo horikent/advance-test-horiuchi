@@ -23,20 +23,29 @@
 
   
   th {
-      color: black;
-      width:20%;
-      padding: 10px 20px 0 0;
-      font-size:12px;
-      vertical-align:top;
-    }
+    color: black;
+    width:20%;
+    padding: 10px 20px 0 0;
+    font-size:12px;
+    vertical-align:top;
+  }
 
   td {
-      padding: 10px 0px;
-      width:60%;
-      height:30px;
-      color:rgb(204,204,204);
-      font-size:13px;
-      line-height: 200%;
+    padding: 10px 0px;
+    width:60%;
+    height:30px;
+    color:rgb(204,204,204);
+    font-size:13px;
+    line-height: 200%;
+  }
+
+  .fullname{
+    width:100%;
+  }
+
+  .lastname, .firstname{
+    width:47%;
+    float:left;
   }
 
   .gender__font{
@@ -53,10 +62,57 @@
     border: 1px solid rgb(204,204,204);
     border-radius:5px;
   }
-
-  input[type= "radio"]{
-
+  
+  label {
+    position: relative;
+    cursor: pointer;
+    padding:0 30px;
   }
+
+  label::before,
+  label::after {
+    content: "";
+    display: block; 
+    border-radius: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+  }
+
+  label::before {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    left: 5px;
+  }
+
+  label::after {
+    background-color: black;
+    border-radius: 50%;
+    opacity: 0;
+    width: 8px;
+    height: 8px;
+    left: 14px
+  }
+
+  input:checked + label::after {
+    opacity: 1;
+  }
+
+  .visually-hidden{
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%); 
+  margin: -1px;
+}
 
   input[type="string"] {
     width: 90%;
@@ -76,18 +132,16 @@
     margin:20px 25% 0 auto;
   }
 
-    button{
-      padding: 10px 40px;
-      background-color: black;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius:5px;
-  }
+  button{
+    padding: 10px 40px;
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius:5px;
+}
 
-  .flex-item{
-    display:flex;
-  }
+
 
 </style>
 <!DOCTYPE html>
@@ -112,12 +166,19 @@
           お名前 <span class="contact-red">*</span>
         </th>
         <td>
-          <div class="fullname flex-item"></div>
-            <input name="fullname" value="{{ old('fullname') }}" type="string">
-              @if ($errors->has('fullname'))
-                <p class="error-message">{{ $errors->first('fullname') }}</p>
+          <div class="fullname"></div>
+            <div class="lastname">
+              <input name="lastname" value="{{ old('lastname') }}" type="string"><br>例) 山田
+              @if ($errors->has('lastname'))
+                <p class="error-message">{{ $errors->first('lastname') }}</p>
               @endif<br>
-                &emsp;例) 山田　太郎 
+            </div>
+            <div class="firstname">  
+              <input name="firstname" value="{{ old('firstname') }}" type="string"><br>例) 太郎 
+                @if ($errors->has('firstname'))
+                  <p class="error-message">{{ $errors->first('firstname') }}</p>
+                @endif<br>
+            </div>  
           </div>  
         </td>
       </tr>
@@ -126,9 +187,11 @@
           性別 <span class="contact-red">*</span>
         </th>
         <td>
-          <div class="gender__font">
-            <input type="radio" name="gender" value="1"  checked>男性
-            <input type="radio" name="gender" value="2" >女性    
+          <div class="gender__font" >
+            <input type="radio" class="visually-hidden" name="gender" id="men" value="1"  checked>
+            <label for="men">&emsp;男性</label>
+            <input type="radio" class="visually-hidden" name="gender" id="women" value="2" >
+            <label for="women">&emsp;女性</label>
               @if ($errors->has('gender'))
                 <p class="error-message">{{ $errors->first('gender') }}</p>
               @endif       
@@ -152,11 +215,14 @@
           郵便番号 <span class="contact-red">*</span>
         </th>
         <td>
-          〒 <input name="postcode" value="{{ old('postcode') }}" type="char">
-            @if ($errors->has('postcode'))
-              <p class="error-message">{{ $errors->first('postcode') }}</p>
-            @endif<br>
-            &emsp;例)123-4567
+          <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+          <form class="h-adr">
+            <span class="p-country-name" style="display:none;">Japan</span>
+              〒 <input name="postcode" class="p-postal-code" value="{{ old('postcode') }}"  type="char" size="8" maxlength="8">            
+              @if ($errors->has('postcode'))
+                <p class="error-message">{{ $errors->first('postcode') }}</p>
+              @endif<br>
+              &emsp;例)123-4567
         </td>
       </tr>
       <tr>
@@ -164,11 +230,12 @@
           住所 <span class="contact-red">*</span>
         </th>
         <td>
-          <input name="address" value="{{ old('address') }}" type="string">
+          <input name="address" class="p-region p-locality p-street-address p-extended-address" value="{{ old('address') }}" type="string">
             @if ($errors->has('address'))
               <p class="error-message">{{ $errors->first('address') }}</p>
             @endif<br>
           &emsp;例)東京都渋谷区千駄ヶ谷1-2-3
+          </form>
         </td>
       </tr>
       <tr>
@@ -176,8 +243,7 @@
           建物名
         </th>
         <td>
-              <input
-        name="building_name" value="{{ old('building_name') }}" type="string">
+              <input name="building_name" value="{{ old('building_name') }}" type="string">
           @if ($errors->has('building_name'))
             <p class="error-message">{{ $errors->first('building_name') }}</p>
           @endif<br>

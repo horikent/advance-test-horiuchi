@@ -83,9 +83,9 @@
             お名前
           </th>
           <td>
-            <div class="fullname" flex-item></div>
-              {{ $inputs['fullname'] }}
-                <input name="fullname" value="{{ $inputs['fullname'] }}" type="hidden">
+            <div class="fullname"></div>
+              {{ $inputs['lastname'] }}{{ $inputs['firstname'] }}
+                <input name="fullname" value="{{ $inputs['lastname'] }}{{ $inputs['firstname'] }}" type="hidden">
             </div>  
           </td>
         </tr>
@@ -151,7 +151,7 @@
       </table>
       <div class="confirm__btn">  
         <button type="submit" name="action" value="submit">送信</button><br>
-        <button class="back-btn" type="submit" name="action" value="back">修正する</button><br>
+        <button type="submit" name="action" value="back" class="back-btn" >修正する</button><br>
       </div>    
     </form>
   </div>  

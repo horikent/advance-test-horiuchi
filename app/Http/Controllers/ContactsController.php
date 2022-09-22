@@ -9,40 +9,34 @@ use App\Https\Requests\ContactRequest;
 class ContactsController extends Controller
 {
 
-    public function rules()
-    {
-        return [
-            'fullname' => 'required',
-            'gender' => 'required',
-            'email' =>  'required|email',
-            'postcode' =>  'required',
-			'address' => 'required',
-			'opinion' => 'required'
-        ];
-    }
-    
     public function index(Request $request)
     {
         return view('index');
+    }    
+        
+    public function prepareForValidation()
+    {
+        $this->merge(['postcode' => mb_convert_kana($this->postcode, 'as')]);
     }
-    
     
     public function confirm(Request $request)
     {
 
         $request->validate([
-            'fullname' => 'required',
+            'lastname' => 'required|max:127',
+            'firstname'=> 'required|max:127',
             'gender' =>  'required',
-            'email' =>  'required|email',
-            'postcode' =>  'required|in:-',
-			'address' => 'required',
+            'email' =>  'required|email|max:255',
+            'postcode' =>  'required|min:8|max:8',
+			'address' => 'required|max:255',
+			'building_name' => 'max:255',
 			'opinion' => 'required|max:120'
         ]);
         [
             'name.required' => '名前を入力してください',
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => 'メールアドレスの形式で入力してください',
-            'postocode.required' => '郵便番号は半角数字８桁で入力してください',
+            'postocode.required' => '郵便番号はハイフンを含む半角数字８桁で入力してください',
             'registered_at.date' => '日付の形式で入力してください',
             'address.required' => '住所を入力してください',
             'opinion.required' => 'ご意見を入力してください',

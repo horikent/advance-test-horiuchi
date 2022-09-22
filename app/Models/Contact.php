@@ -18,11 +18,7 @@ class Contact extends Model
         'opinion',
     ];    
         
-    public static function getDate($from, $until)
-    {
-        $contacts = Contact::whereBetween("created_at", [$from, $until])->get();
-        return $contacts;
-    }
+
 
 }
 
